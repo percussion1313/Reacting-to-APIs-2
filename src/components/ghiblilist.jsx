@@ -5,11 +5,11 @@ import Peoplecard from './peoplecard.jsx';
 
 const GhibliList = (props) => {
 
-    let ghibliData = props.items.map((obj, index) => {
+    let ghibliData = props.items.map((res, index) => {
         if (props.type === "film") {
-            return <Filmcard key={obj.id} siteDetails={obj} />
+            return <Filmcard key={res.id} siteDetails={res} />
         } else {
-            return <Peoplecard  key={obj.id} siteDetails={obj}/>
+            return <Peoplecard  key={res.id} siteDetails={res}/>
         }
     });
 

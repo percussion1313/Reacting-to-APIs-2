@@ -11,16 +11,17 @@ class App extends Component {
         this.state = {
             data: [],
             type: "",
+           
         }
 
         this.filmData = () => {
             fetch(`${BASE_URL}`)
                 .then((results) => {
                     return results.json()
-                }).then((obj) => {
+                }).then((res) => {
                     this.setState({
                         type: "film",
-                        data: obj
+                        data: res
                     });
                 })
         }
@@ -29,16 +30,19 @@ class App extends Component {
             fetch(`${PEOPLE_URL}`)
                 .then((results) => {
                     return results.json()
-                }).then((obj) => {
+                }).then((res) => {
                     this.setState({
                         type: "people",
-                        data: obj
+                        data: res
                     });
                 })
         }
     }
 
-
+    
+    hasLoaded = () => {
+        this.setState({hasLoaded: this.state.hasLoaded});
+    } 
 
     render() {
 
@@ -46,8 +50,8 @@ class App extends Component {
         return (
             <React.Fragment>
                 <h1 className="text-center text-shadow">STUDIO GHIBLI</h1>
-                <button id="card-button" className="btn btn-success d-flex mx-auto shadow m-2" onClick={this.filmData}>Show Films</button>
-                <button id="card-button" className="btn btn-success d-flex mx-auto shadow m-2" onClick={this.peopleData}>Show People</button>
+                <button id="card-button" className="btn btn-success d-flex mx-auto shadow m-2" onClick={this.filmData} onDoubleClick={this.hasLoaded}>Show Films</button>
+                <button id="card-button" className="btn btn-success d-flex mx-auto shadow m-2" onClick={this.peopleData} onDoubleClick={this.hasLoaded}>Show Characters</button>
                 <GhibliList items={this.state.data} type={this.state.type} />
             </React.Fragment>)
 
